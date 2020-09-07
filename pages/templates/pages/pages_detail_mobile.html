@@ -1,0 +1,55 @@
+{% extends "base_mobile.html" %}
+{% load static %}
+
+{% block meta %}
+    <title>{{ object.title }}</title>
+    <meta name="description" content="{{ object.meta_d }}">
+{% endblock %}
+
+{% block content %}
+    {% autoescape off %}
+        <div class="breadcrumbs">
+            <div class="uk-container">
+                <p><a href="/">Главная</a></p> 
+                <p><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></p>
+                {% for page in object.get_ancestors %}
+                    {% if page.status and page.is_link %}
+                        <p><a href="{{ page.get_absolute_url }}">{{ page.name }}</a></p>
+                        <p><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></p>
+                    {% endif %}
+                {% endfor %}
+                <p><span>{{ object.name }}</span></p>
+            </div>
+        </div>
+
+        {% for block in blocks %}
+          {% if block.html_mobile %}
+            {{ block.html_mobile }}
+          {% else %}
+            {{ block.block.html_mobile }}
+          {% endif %}
+        {% endfor %}
+
+        {% if object.get_children %}
+          <section class="uk-section">
+              <div class="uk-container">
+                  <div class="uk-section__title-block">
+                      <div class="uk-h2">Смотрите также</div>
+                  </div>
+                  <div class="rp-related-links">
+                      <ul class="rp-link-list uk-grid uk-grid-small uk-child-width-1-3@s" uk-grid>
+                          {% for child in object.get_children %}
+                            <li><a class="rp-link-list__item rp-link-list__item--large" href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                          {% endfor %}
+                      </ul>
+                      <div class="uk-margin-top">
+                          <a class="rp-related-links__more-button" href="#">Показать ещё…</a>
+                      </div>
+                  </div>
+              </div>
+          </section>
+        {% endif %}
+
+
+    {% endautoescape %}
+{% endblock %}

@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+    <title>{{ obj.title }}</title>
+    <meta name="description" content="{{ obj.meta_d }}">
+{% endblock %}
+
+{% block content %}
+    <div id="slide1" class="slide1 double__block">
+      <div class="uk-container">
+        <div class="uk-flex container">
+          <div class="uk-width-1-2 leftbar">
+            <h1>Натяжные потолки <br/><span>Room Potolok</span></h1>
+            <p class="maintext">Заказывая натяжные потолки у нас, вы доверяете дело профессионалам. Наши специалисты уже который год выполняют свою работу экспертно, качественно и с гарантией.</p>
+            <a href="#feedback" uk-scroll><button class="mainbutton">Закажите звонок</button></a>
+            <p>или позвонить по телефону: <br/><a href="tel:{{ CONTACTS.PHONE.0 }}">{{ CONTACTS.PHONE.1 }}</a>, &nbsp; <a href="tel:{{ CONTACTS.MOBILE.0 }}"> {{ CONTACTS.MOBILE.1 }} </a> </p>
+          </div>
+          <div class="uk-width-1-2 rightbar">
+            <div class="img" style="background-image:url({% static 'pages/images/2.jpg' %});"></div>
+            <div class="rightbar-h1">Новоселам</div>
+            <p>Уважаемые клиенты! Наша компания предоставляет скидку новосёлам в размере <b>10%</b> на все полотна. Акция действует постоянно!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="slide_services" class="slide_services">
+      <div class="h2 center" id="services">Наши услуги</div>
+      <div class="uk-flex uk-flex-center">
+          <p class="subtitle">Наша компания предоставляет широкий спектр натяжных потолков. Матовые, тканевые, пвх и другие виды натяжных потолков вы можете найти в нашем обширном каталоге</p>
+      </div>
+      <div class="uk-container">
+          <div class="uk-grid">
+              <div class="uk-width-2-3 services">
+                  <div class="item">
+                      <a href="https://room-potolok.ru/matovye-natyazhnye-potolki/"><img src="{% static 'pages/images/roof-01.jpg' %}"/></a>
+                      <div class="uk-flex uk-flex-column">
+                          <div class="item-h4"> <a href="https://room-potolok.ru/matovye-natyazhnye-potolki/">Матовые натяжные потолки</a> </div>
+                          <p>Такая фактура натяжного потолка, имитирующая окрашенную штукатурку. Натяжной потолок с матовой фактурой это оптимальное решение для классического дизайна интерьера обладающего особой элегантностью.</p>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <a href="https://room-potolok.ru/tkanevye-natyazhnye-potolki/"><img src="{% static 'pages/images/roof-02.jpg' %}"/></a>
+                      <div class="uk-flex uk-flex-column">
+                          <div class="item-h4"> <a href="https://room-potolok.ru/tkanevye-natyazhnye-potolki/">Тканевые натяжные потолки</a> </div>
+                          <p>Как понятно из названия, используемое в таких конструкциях полотно выполнено из тканевого материала. Благодаря чему, они имеют шероховатую фактуру и способны создать более уютную атмосферу в помещении.</p>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <a href="https://room-potolok.ru/satinovye-natyazhnye-potolki/"><img src="{% static 'pages/images/roof-03.jpg' %}"/></a>
+                      <div class="uk-flex uk-flex-column uk-flex-wrap-bottom">
+                          <div class="item-h4"> <a href="https://room-potolok.ru/satinovye-natyazhnye-potolki/">Сатиновые натяжные потолки</a> </div>
+                          <p>Такая текстура натяжных потолков подойдет для тех помещений, где важна спокойная атмосфера и гармония.</p>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <a href="https://room-potolok.ru/glyancevye-natyazhnye-potolki/"><img src="{% static 'pages/images/roof-04.jpg' %}"/></a>
+                      <div class="uk-flex uk-flex-column">
+                          <div class="item-h4"> <a href="https://room-potolok.ru/glyancevye-natyazhnye-potolki/">Глянцевые натяжные потолки</a> </div>
+                          <p>Благодаря дополнительному освещению, на основе такого потолка можно создать различные уникальные решения.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="uk-width-1-3">
+                  <div class="calc">
+                      <div class="calc-h4">Калькулятор</div>
+                      <form id="calculator">
+                          <select name="material" id="material" class="required wide">
+                              <option value="" disabled selected>Выберите материал...</option>
+                              <option value="polyplast">«Polyplast» + «MSD» ПВХ</option>
+                              <option value="pongs">«Pongs» ПВХ</option>
+                              <option value="descor">«Descor» Тканевые</option>
+                          </select>
+                          <div class="calc__helper">
+                            <input id="calc_long" name="calc_long" class="uk-input" type="text" maxlength="5" required/>
+                            <label class="uk-form-label" for="calc_long">Длина помещения (м)</label>
+                          </div>
+                          <div class="calc__helper">
+                            <input id="calc_width" name="calc_width" class="uk-input" type="text" maxlength="5" required/>
+                            <label class="uk-form-label" for="calc_width">Ширина помещения (м)</label>
+                          </div>
+                          <div class="calc__helper">
+                            <input id="calc_lamps" name="calc_lamps" class="uk-input" type="text" maxlength="5" required value="0"/>
+                            <label class="uk-form-label" for="calc_lamps">Количество люстр (шт)</label>
+                          </div>
+                          <div class="calc__helper">
+                            <input id="calc_lightings" name="calc_lightings" class="uk-input" type="text" maxlength="5" required value="0"/>
+                            <label class="uk-form-label" for="calc_lightings">Количество светильников (шт)</label>
+                          </div>
+                          <div class="calc__helper">
+                            <input id="calc_pipes" name="calc_pipes" class="uk-input" type="text" maxlength="5" required value="0"/>
+                            <label class="uk-form-label" for="calc_pipes">Количество трубопроводов (шт)</label>
+                          </div>
+                          <div class="calc__helper">
+                            <input id="calc_corners" name="calc_corners" class="uk-input" type="text" maxlength="5" required value="4"/>
+                            <label class="uk-form-label" for="calc_corners">Количество углов (шт)</label>
+                          </div>
+                          <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                              <label><input id="calc_tape" name="calc_tape" class="uk-checkbox" type="checkbox"> Маскировочная лента белая</label>
+                          </div>
+                          <div class="result">
+                              <p>Стоимость: <b id="total"></b> р.</p> <p>При заказе сегодня: <span id="discount"></span> р.</p> <a href="#feedback" uk-scroll><input type="button" value="Заказать"/></a> 
+                          </div>
+                          <button class="">Рассчитать</button>
+                      </form>
+                      <img src="{% static 'pages/images/bg-calc.png' %}"/>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="slide2" class="slide2">
+        <div class="uk-container">
+            <div class="h2 center">Каталог</div>
+            <div class="uk-flex uk-flex-center">
+                <p class="subtitle">Наша компания предоставляет широкий спектр натяжных потолков. Матовые, тканевые, пвх и другие виды натяжных потолков вы можете найти в нашем обширном каталоге</p>
+            </div>
+            <div class="uk-grid uk-grid-large">
+                <div class="uk-width-1-3">
+                    <div class="uk-margin">
+                        
+                        <div class="example">
+                            <div>
+                                <img src="{% static 'pages/images/roof-01.jpg' %}"/>
+                            </div>
+                            <div class="example-h4">Натяжной потолок <br/><b>в офис</b></div>
+                            <p>Мы готовы подобрать вам идеальный вариант натяжного потолка в роскошный офис. Наши специалисты реализовали большое количество подобных проектов.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-1-3">
+                    <div class="uk-margin">
+                        <div class="example">
+                            <div>
+                                <img src="{% static 'pages/images/roof-02.jpg' %}"/>
+                            </div>
+                            <div class="example-h4">Натяжной потолок <br/> <b>на кухню</b></div>
+                            <p>Мы готовы подобрать вам идеальный вариант натяжного потолка в роскошный офис. Наши специалисты реализовали большое количество подобных проектов.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-width-1-3">
+                    <div class="uk-margin">
+                        <div class="example">
+                            <div>
+                                <img src="{% static 'pages/images/roof-03.jpg' %}"/>
+                            </div>
+                            <div class="example-h4">Натяжной потолок <br/> <b>в спальню</b></div>
+                            <p>Мы готовы подобрать вам идеальный вариант натяжного потолка в роскошный офис. Наши специалисты реализовали большое количество подобных проектов.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide3">
+        <div class="uk-container">
+        <div class="h2 center">В чем наше ключевое <b>преимущество</b>?</div>
+        <div class="uk-grid advantage">
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#quality"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Собственное производство</div> </div>
+                <div class="uk-flex uk-flex-center"> <p>В Подольске у нас есть небольшой завод  по изготовлению материалов из пластика</p> </div>
+            </div>
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#world"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Современные технологии</div> </div>
+                <div class="uk-flex uk-flex-center"> <p>Мы всегда совершенствуемся, стараемся быть лучше и выполняем все заказы на высшем уровне</p> </div>
+            </div>
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#like"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Качество продукции</div> </div>
+                <div class="uk-flex uk-flex-center"> <p>Нашу компанию отличает качество предоставляемых услуг, мы по праву являемся передовой организацией!</p> </div>
+            </div>
+            <div class="uk-width-1-1"></div>
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#firewall"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Гарантийный срок</div> </div>
+                <div class="uk-flex uk-flex-center"> <p>Мы одна из немногих компаний предоставляющих гарантию на собственную работу</p> </div>
+            </div>
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#calendar"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Работаем без выходных</div> </div>
+                <div class="uk-flex uk-flex-center"> <p>Наши специалисты готовы проконсультировать вас в любое время</p> </div>
+            </div>
+            <div class="uk-width-1-3">
+                <div class="uk-flex uk-flex-center svg"> <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#settings"></use></svg> </div>
+                <div class="uk-flex uk-flex-center"> <div class="advantage-h4">Множество доп. услуг</div> </div>
+                <div class="uk-flex uk-flex-center"><p>У нас отличный выбор сопутствующих услуг. Позвоните нам и узнайте самую последнюю информацию</p></div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="slide4">
+        <div class="uk-container">
+            <div class="h2 center">Готовые решения</div>
+            <div class="uk-flex uk-flex-center">
+                <p class="subtitle">Наша компания предоставляет широкий спектр натяжных потолков. Матовые, тканевые, пвх и другие виды натяжных потолков вы можете найти в нашем обширном каталоге</p>
+            </div>
+            <br/>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="uk-grid uk-grid-large">
+                      {% for iblock in iblocks %}
+                        <div class="uk-width-1-3 item">
+                          <a href="{{ iblock.link }}">
+                            <div>
+                              <img src="{{ iblock.image.url }}"/>
+                            </div>
+                            <p>{{ iblock.name }}</p>
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                </div>
+                <div class="uk-width-1-2 why">
+                    <div class="why-h4">Почему стоит выбрать наше готовое решение?</div>
+                    <ul>
+                        <li>Вы получаете 100% рабочее решение</li>
+                        <li>В несколько раз быстрее, чем под заказ</li>
+                        <li>Только лучшая продукция</li>
+                        <li>Взаимозаменяемость</li>
+                        <li>Опыт установки дает гарантию качества</li>
+                        <li>Вы получаете 100% рабочее решение</li>
+                        <li>В несколько раз быстрее, чем под заказ</li>
+                        <li>Только лучшая продукция</li>
+                        <li>Взаимозаменяемость</li>
+                        <li>Опыт установки дает гарантию качества</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-container content">
+      <p>Компания &laquo;Room Potolok&raquo; предлагает современный, долговечный и&nbsp;доступный вариант оформления потолочного пространства. В&nbsp;нашем <span style="white-space:nowrap;">интернет-магазине</span> вы&nbsp;можете недорого купить полотна для натяжного потолка с&nbsp;установкой &laquo;под ключ&raquo;. По&nbsp;сравнению с&nbsp;традиционной покраской или побелкой это решение выглядит очень выигрышно и&nbsp;презентабельно.</p>
+
+      <h2>В&nbsp;нашем каталоге натяжных потолков можно заказать:</h2>
+
+      <ul>
+        <li>сатиновые, матовые, глянцевые, лаковые полотна;</li>
+        <li>из&nbsp;ПВХ, тканевые;</li>
+        <li>гипоаллергенные;</li>
+        <li>с&nbsp;шумоизоляцией;</li>
+        <li>одно- и&nbsp;многоуровневые;</li>
+        <li>для кухни, спальни, детской, санузла, балкона, лоджии, мансарды;</li>
+        <li>дизайнерские и&nbsp;с&nbsp;фотопечатью;</li>
+        <li>с&nbsp;облаками и&nbsp;под звездное небо;</li>
+        <li>фактурные, мраморные, зеркальные и т. д.</li>
+      </ul>
+
+      <h2>Преимущества сотрудничества с&nbsp;нами</h2>
+
+      <ul>
+        <li>Мы&nbsp;следим за&nbsp;тем, чтобы комплекты натяжных потолков для помещений любой площади и&nbsp;конфигурации были в&nbsp;наличии.</li>
+        <li>Мы&nbsp;сотрудничаем напрямую с&nbsp;производителями из&nbsp;Швейцарии, Бельгии, Германии, России, поэтому предлагаем конкурентоспособные цены на&nbsp;полотна из&nbsp;всех материалов.</li>
+        <li>Наша компания оказывает услугу полного цикла, поэтому у&nbsp;нас вы&nbsp;можете заказать и&nbsp;подбор, и&nbsp;установку, и&nbsp;обслуживание, и&nbsp;сопутствующие действия.</li>
+        <li>Мы&nbsp;подходим к&nbsp;каждому проекту индивидуально, разрабатываем дизайн и&nbsp;воплощаем его в&nbsp;жизнь, создавая эксклюзивные решения.</li>
+      </ul>
+
+      <p>Чтобы стать владельцем уникального, только вашего потолка в&nbsp;Москве или другом городе, свяжитесь с&nbsp;нами по&nbsp;телефону и&nbsp;оставьте заявку на&nbsp;вызов замерщика. Остались вопросы? Задайте их&nbsp;нам по&nbsp;телефону, указанному на&nbsp;сайте.</p>
+          </div>
+
+    {% comment %}
+    <div class="slide5">
+        <div class="uk-container">
+            <div class="h2 center">Что о нас думают?</div>
+            
+            <div class="uk-flex person">
+                <div class="avatar">
+                    <img src="{% static "pages/images/person1.jpg" %}"/>
+                </div>
+                <div class="review">
+                    <h3>Марк о сотрудничестве с room-potolok.ru</h3>
+                    <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#quote"></use></svg>
+                    <p>Заказывал натяжной потолок в новостройку, все выполнили качественно и в срок. Отдельно хотел бы поблагодарить прораба, постоянно связывался, задавал уточняющие вопросы. Уже посоветовал всем своим знакомым и надеюсь в будущем на плодотворное сотрудничество.</p>
+                </div>
+            </div>
+
+            <div class="uk-flex uk-flex-right person">
+                <div class="review">
+                    <h3>Оксана. Мысли о компании.</h3>
+                    <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#quote"></use></svg>
+                    <p>Заказывал натяжной потолок в новостройку, все выполнили качественно и в срок. Отдельно хотел бы поблагодарить прораба, постоянно связывался, задавал уточняющие вопросы. Уже посоветовал всем своим знакомым и надеюсь в будущем на плодотворное сотрудничество.</p>
+                </div>
+                <div class="avatar">
+                    <img src="{% static "pages/images/person2.jpg" %}"/>
+                </div>
+            </div>
+
+            <div class="uk-flex person">
+                <div class="avatar">
+                    <img src="{% static "pages/images/person3.jpg" %}"/>
+                </div>
+                <div class="review">
+                    <h3>Антон. Успешный ремонт.</h3>
+                    <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#quote"></use></svg>
+                    <p>Заказывал натяжной потолок в новостройку, все выполнили качественно и в срок. Отдельно хотел бы поблагодарить прораба, постоянно связывался, задавал уточняющие вопросы. Уже посоветовал всем своим знакомым и надеюсь в будущем на плодотворное сотрудничество.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endcomment %}
+
+    <div class="slide6">
+        <div class="uk-container">
+            <div class="h2 center">Мы вам перезвоним!</div>
+            <div class="uk-grid">
+                <div class="uk-width-1-3"></div>
+                <div class="uk-width-1-3">
+                    <form class="feedback" id="feedback">
+                        <div class="uk-margin"> <input name="name" type="text" class="uk-input" placeholder="Введите ФИО" required /> </div>
+                        <div class="uk-margin"> <input name="phone" type="text" class="uk-input" placeholder="Ваш телефон" required /> </div>
+                        <div class="uk-margin"> <input name="email" type="text" class="uk-input" placeholder="Электронная почта"/> </div>
+                        <div class="uk-margin"> <textarea name="comment" class="uk-textarea" placeholder="Комментарий"></textarea> </div>
+                        <p class="feedback__modal__subtitle-white">* вводя свои персональные данные вы соглашаетесь с <a href="https://room-potolok.ru/policy/">политикой конфиденциальности</a> установленной на нашем портале.</p>
+                        <div class="uk-margin"> <button class="uk-button">Отправить</button></div>
+                    </form>
+                </div>
+                <div class="uk-width-1-3"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

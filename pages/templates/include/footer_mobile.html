@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="footer">
+    <div class="uk-container">
+        <div class="uk-grid">
+            <div class="uk-width-1-1 uk-flex uk-flex-center">
+                <a href="/" class="logo">
+                    <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#logo"></use></svg>
+                </a>
+            </div>
+            <div class="uk-width-1-1 uk-flex uk-flex-center uk-margin">
+                <button data-url="{% url 'resolution' 'desktop' %}" class="uk-button change-resolution">Полная версия сайта</button> 
+            </div>
+            <div class="uk-width-1-1 uk-flex uk-flex-column uk-flex-center">
+                <p> <a href="tel:{{ CONTACTS.PHONE.0 }}"> {{ CONTACTS.PHONE.1 }} </a> </p>
+                <p> <a href="tel:{{ CONTACTS.MOBILE.0 }}"> {{ CONTACTS.MOBILE.1 }} </a> </p>
+            </div>
+            <div class="uk-width-1-1 uk-flex uk-flex-center uk-margin">
+                <div>
+                    <p>Режим работы: С 09-00 ДО 21-00 без выходных</p>
+                    <p>Room potolok © 2009-{{ YEAR }} (Все права защищены)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% load static %}
+<div class="catalog">
+    <div class="menu">
+        <h2>Каталог</h2>
+        <ul uk-accordion="multiple: true">
+            {% for page in left_menu %}
+                {% if page.get_children %}
+                    <li class="submenu {% if object == page or object in page.get_children %}uk-open{% endif %}">
+                        <span class="uk-accordion-title">
+                            <a>{{ page.name }}</a> 
+                            <span class="menu__opener"><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></span>
+                        </span>
+                        <ul class="uk-accordion-content">
+                            {% for child in page.get_children %}
+                                {% if object == child %}
+                                    <li class="active"><a>{{ child.name }}</a></li>
+                                {% else %}
+                                    <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    {% if object == page %}
+                        <li class="active"><a>{{ page.name }}</a></li>
+                    {% else %}
+                        <li><a {% if page.is_link %}href="{{ page.get_absolute_url }}{% endif %}">{{ page.name }}</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="https://room-potolok.ru/sales/"><div class="fast-link red"> Акции </div></a> 
+    {% comment %}
+        <div class="fast-link"> <a href="">Новинки</a> </div>
+        <div class="fast-link"> <a href="">Скидки</a> </div>
+    {% endcomment %}
+</div>

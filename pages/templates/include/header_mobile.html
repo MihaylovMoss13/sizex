@@ -1,0 +1,153 @@
+{% load static %}
+
+<div class="header">
+    <div class="uk-flex uk-flex-between uk-flex-middle">
+      <div class="uk-offcanvas-content">
+        <button class="uk-button uk-flex uk-flex-center uk-flex-middle" uk-toggle="target: #offcanvas-contacts">
+          <svg><use class="test" xlink:href="{% static 'pages/images/sprite.svg' %}#phone"></use></svg> 
+        </button>
+      </div>
+      <div>
+        <a href="https://room-potolok.ru" class="logo">
+          <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#logo"></use></svg>
+        </a>
+      </div>
+      <div class="uk-offcanvas-content">
+        <button class="uk-button uk-flex uk-flex-center uk-flex-middle" uk-toggle="target: #offcanvas-slide">
+          <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#mobileMenu"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="offcanvas-contacts" uk-offcanvas>
+      <div class="uk-offcanvas-bar">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <p>Звоните</p>
+        <div>
+          <a class="h1" href="tel:{{ CONTACTS.PHONE.0 }}">{{ CONTACTS.PHONE.1 }}</a><br/>
+          <a class="h1" href="tel:{{ CONTACTS.MOBILE.0 }}">{{ CONTACTS.MOBILE.1 }}</a>
+        </div>
+        <div class="uk-margin">
+            <p>или закажите звонок, мы вам перезвоним</p>
+        </div>
+
+        <form class="feedback">
+          <div class="uk-margin-small">
+            <p>Ваше имя </p> <input name="name" type="text" class="uk-input" placeholder="Иванов Иван" required />
+          </div>
+          <div class="uk-margin-small">
+            <p>Телефон</p><input name="phone" type="text" class="uk-input" placeholder="+7 926 111-22-33" required /> 
+          </div>
+          <div class="uk-margin-small">
+            <p>Электронная почта</p><input name="email" type="text" class="uk-input" placeholder="E-mail"/> 
+          </div>
+          <div class="uk-margin-small">
+            <p>Комментарий</p><textarea name="comment" class="uk-textarea" placeholder=""></textarea> 
+          </div>
+          <div class="uk-margin"> <button class="uk-button">Отправить</button></div>
+          <p class="feedback__modal__subtitle-white">* вводя свои персональные данные вы соглашаетесь с <a href="https://room-potolok.ru/policy/">политикой конфиденциальности</a> установленной на нашем портале.</p>
+        </form>
+      </div>
+    </div>
+
+
+    <div id="offcanvas-slide" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <div class="uk-flex button-group">
+              <div class="contacts__button">
+                <button uk-toggle="target: #feedback-modal" type="button">Вызвать замерщика</button>
+              </div>
+              <div class="contacts__button">
+                <button uk-toggle="target: #town-modal" type="button">Город: {{ DOMAIN.name }}</button>
+              </div>
+            </div>
+
+            <div class="catalog">
+                <div class="menu">
+                    <h2>Компания room potolok</h2>
+                    <ul uk-accordion="multiple: true">
+                        {% for page in subtop_menu %}
+                            {% if page.get_children %}
+                                <li class="submenu {% if object == page or object in page.get_children %}uk-open{% endif %}">
+                                    <span class="uk-accordion-title">
+                                        <a>{{ page.name }}</a> 
+                                        <span class="menu__opener"><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></span>
+                                    </span>
+                                    <ul class="uk-accordion-content">
+                                        {% for child in page.get_children %}
+                                            {% if object == child %}
+                                                <li class="active"><a>{{ child.name }}</a></li>
+                                            {% else %}
+                                                <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                                {% if object == page %}
+                                    <li class="active"><a>{{ page.name }}</a></li>
+                                {% else %}
+                                    <li><a {% if page.is_link %}href="{{ page.get_absolute_url }}{% endif %}">{{ page.name }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% for page in top_menu %}
+                            {% if page.get_children %}
+                                <li class="submenu {% if object == page or object in page.get_children %}uk-open{% endif %}">
+                                    <span class="uk-accordion-title">
+                                        <a>{{ page.name }}</a> 
+                                        <span class="menu__opener"><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></span>
+                                    </span>
+                                    <ul class="uk-accordion-content">
+                                        {% for child in page.get_children %}
+                                            {% if object == child %}
+                                                <li class="active"><a>{{ child.name }}</a></li>
+                                            {% else %}
+                                                <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                                {% if object == page %}
+                                    <li class="active"><a>{{ page.name }}</a></li>
+                                {% else %}
+                                    <li><a {% if page.is_link %}href="{{ page.get_absolute_url }}{% endif %}">{{ page.name }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <h2>Каталог</h2>
+                    <ul uk-accordion="multiple: true">
+                        {% for page in left_menu %}
+                            {% if page.get_children %}
+                                <li class="submenu {% if object == page or object in page.get_children %}uk-open{% endif %}">
+                                    <span class="uk-accordion-title">
+                                        <a>{{ page.name }}</a> 
+                                        <span class="menu__opener"><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></span>
+                                    </span>
+                                    <ul class="uk-accordion-content">
+                                        {% for child in page.get_children %}
+                                            {% if object == child %}
+                                                <li class="active"><a>{{ child.name }}</a></li>
+                                            {% else %}
+                                                <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                                {% if object == page %}
+                                    <li class="active"><a>{{ page.name }}</a></li>
+                                {% else %}
+                                    <li><a {% if page.is_link %} href="{{ page.get_absolute_url }}"{% endif %}>{{ page.name }}</a></li>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

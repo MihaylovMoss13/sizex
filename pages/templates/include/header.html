@@ -1,0 +1,74 @@
+{% load static %}
+
+<div class="above__header">
+  <div class="uk-container">
+    <div class="uk-flex uk-flex-between">
+      <div> <a uk-toggle="target: #town-modal" type="button">Регион: {{ DOMAIN.name }}</a> </div>
+      <div class="contacts__phone">
+        <svg><use class="test" xlink:href="{% static 'pages/images/sprite.svg' %}#phone"></use></svg> 
+        <a href="tel:{{ CONTACTS.PHONE.0 }}">{{ CONTACTS.PHONE.1 }}</a>, &nbsp;&nbsp;
+        <a href="tel:{{ CONTACTS.MOBILE.0 }}">{{ CONTACTS.MOBILE.1 }}</a>
+      </div>
+      <div class="above__header-menu">
+          {% autoescape off %}
+            {% for item in top_menu %}
+              <a href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+            {% endfor %}
+          {% endautoescape %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="header">
+  <div class="uk-container">
+    <div class="uk-flex uk-flex-middle">
+      <a href="https://room-potolok.ru" class="logo">
+        <svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#logo"></use></svg>
+      </a>
+      
+      <div class="uk-flex-auto uk-margin-left">
+        <div class="uk-flex uk-flex-right contacts">
+          <div class="contacts__button contacts__button-opacity">
+            <button uk-toggle="target: #feedback-modal-type2" type="button">
+              <svg><use class="test" xlink:href="{% static 'pages/images/sprite.svg' %}#calc"></use></svg> 
+              Рассчитать стоимость
+            </button>
+          </div>
+          <div class="contacts__button">
+            <button uk-toggle="target: #feedback-modal" type="button">
+              <svg><use class="test" xlink:href="{% static 'pages/images/sprite.svg' %}#getSize"></use></svg> 
+              Вызвать замерщика
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="under__header">
+    <div class="uk-container">
+          <div class="uk-flex topmenu">
+            {% autoescape off %}
+              {% for item in subtop_menu %}
+                <div class="topmenu__item">
+                  <a {% if item.is_link %}href="{{ item.get_absolute_url }}"{% endif %}>{{ item.name }}</a>
+                  {% if item.get_children %}
+                    <div class="topmenu__submenu_wrapper">
+                      <ul class="topmenu__submenu">
+                        {% for child in item.get_children %}
+                          <li><a href="{{ child.get_absolute_url }}">{{ child }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% endautoescape %}
+            <div class="topmenu__item">
+              <a uk-toggle="target: #catalog-modal">Каталог</a>
+            </div>
+          </div>
+  </div>
+</div>

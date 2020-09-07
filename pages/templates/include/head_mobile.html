@@ -1,0 +1,20 @@
+{% load static %}
+{% load compress %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link rel=icon type=image/x-icon href=/favicon.ico>
+
+{% compress css %}
+    <link rel="stylesheet" href="{% static 'pages/css/uikit.min.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/sweetalert.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/nice-select.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/style_mobile.css'%}">
+{% endcompress %}
+
+{% if DOMAIN.scripts %}
+    {% autoescape off %}
+        {{ DOMAIN.scripts }}
+    {% endautoescape %}
+{% endif %}

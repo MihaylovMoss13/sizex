@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+    <head>
+        {% block meta %}
+            <title></title>
+            <meta name=description content="">
+        {% endblock %}
+
+        {% include 'include/head_mobile.html' %}
+
+        {% block extra %}
+        {% endblock %}
+        {% if not DEBUG %}
+            {% include 'include/counters.html' %}
+        {% endif %}
+    </head>
+
+    <body>
+        {% include 'include/header_mobile.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% include 'include/footer_mobile.html' %}
+
+        {% include 'include/popups.html' %}
+
+        {% include 'include/scripts.html' %}
+    </body>
+</html>

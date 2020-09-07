@@ -1,0 +1,3 @@
+.module { overflow-x: scroll;}
+.table.helper { position: absolute; top:-100px;}
+#drag-line { z-index: 100}

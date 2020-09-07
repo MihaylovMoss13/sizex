@@ -1,0 +1,52 @@
+{% load static %}<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:yandex="http://news.yandex.ru"
+     xmlns:media="http://search.yahoo.com/mrss/"
+     xmlns:turbo="http://turbo.yandex.ru"
+     version="2.0">
+    <channel>
+        <!-- Информация о сайте-источнике -->
+        <title>Натяжные потолки от компании Room Potolok</title>
+        <link>https://room-potolok.ru</link>
+        <description>Room potolok</description>
+        <language>ru</language>
+        <turbo:analytics></turbo:analytics>
+        <turbo:adNetwork></turbo:adNetwork>
+        {% for page in pages %}
+          <item turbo="true">
+              <!-- Информация о странице -->
+              <link>{{ page.get_absolute_url }}</link>
+              <turbo:source></turbo:source>
+              <turbo:topic></turbo:topic>
+              <pubDate>{{ page.update_at}}</pubDate>
+              <author>Henry Pro</author>
+              <metrics>
+                  <yandex schema_identifier="Идентификатор">
+                      <breadcrumblist>
+                          <breadcrumb url="https://room-potolok.ru/" text="Главная"/>
+                          {% for parent in page.get_ancestors %}
+                              {% if parent.status and parent.is_link %}
+                                <breadcrumb url="{{ parent.get_absolute_url }}" text="{{ parent.name }}"/>
+                              {% endif %}
+                          {% endfor %}
+                          <breadcrumb url="{{ page.get_absolute_url }}" text="{{ page.name }}"/>
+                      </breadcrumblist>
+                  </yandex>
+              </metrics>
+              <yandex:related></yandex:related>
+              <turbo:content>
+                  <![CDATA[
+                    <header>
+                      <h1>{{ page.h1 }}</h1>
+                      <h2>Компания room-potolok</h2>
+                      <figure>
+                        <img src="https://room-potolok.ru{% static 'pages/images/IMG_3995.jpg' %}"/>
+                      </figure>
+                      <a href="{{ page.get_absolute_url }}">{{ page.h1 }}</a>
+                      <a href="https://room-potolok.ru">Главная</a>
+                    </header>
+                  ]]>
+              </turbo:content>
+          </item>
+        {% endfor %}
+    </channel>
+</rss>

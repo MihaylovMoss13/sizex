@@ -1,0 +1,11 @@
+.ui-widget-header, .module.aligned ul { background: transparent;}
+.ui-widget.ui-widget-content, .ui-timepicker-table.ui-widget-content { box-shadow: none;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {background: none; border: none;}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background: none; border: none;}
+.module .form-row { padding: 0 0 10px;}
+.ui-tabs .ui-tabs-nav li.ui-tabs-active, .ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-top: 4px;}
+.ui-widget-content, 
+.ui-tabs .ui-tabs-nav { border: none !important;}
+.module.aligned ul { margin: 0 0 0 170px;}
+.module .form-row label { width: 160px;}
+.inline-group .tabular .ui-tabs .ui-tabs-panel { padding: 0px 5px 5px;}

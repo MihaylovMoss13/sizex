@@ -1,0 +1,15 @@
+{% load static %}
+{% load compress %}
+
+{% compress js %}
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/jquery-3.3.1.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/jquery.nice-select.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/uikit.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/uikit-icons.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/underscore-min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/backbone-min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/jquery.validate.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/messages_ru.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/sweetalert.min.js' %}"></script>
+    <script {% if not DEBUG %}async{% endif %} src="{% static 'pages/js/scripts.js' %}"></script>
+{% endcompress %}

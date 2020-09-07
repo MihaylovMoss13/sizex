@@ -1,0 +1,25 @@
+{% load static %}
+{% load compress %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="{{ object.title }}"/>
+<meta property="og:description" content="{{ object.meta_d }}"/>
+<meta property="og:image" content="https://room-potolok.ru{% static 'pages/images/IMG_3995.jpg' %}"/>
+<meta property="og:type" content="profile"/>
+
+<meta property="og:url" content= "{{ object.get_host_url }}" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel=icon type=image/x-icon href=/favicon.ico>
+{% compress css %}
+    <link rel="stylesheet" href="{% static 'pages/css/uikit.min.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/sweetalert.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/nice-select.css'%}">
+    <link rel="stylesheet" href="{% static 'pages/css/style.css'%}">
+{% endcompress %}
+
+{% if DOMAIN.scripts %}
+    {% autoescape off %}
+        {{ DOMAIN.scripts }}
+    {% endautoescape %}
+{% endif %}

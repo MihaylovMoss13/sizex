@@ -1,0 +1,42 @@
+import os
+import datetime
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG = True
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sizex',
+        'USER': 'sizex',
+        'PASSWORD': 'sizex',
+        'HOST': 'postgres',
+        'PORT': 5432,
+    }
+}
+
+CDN_DOMAIN = '127.0.0.1:8000'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+ALLOWED_HOSTS = ['*']
+INTERNAL_IPS = ['127.0.0.1', '::1']
+
+CACHE_REDIS = {
+    'host': 'redis',
+    'port': 6379,
+    'socket_timeout': 3,
+}
+
+CACHEOPS_REDIS = CACHE_REDIS
+
+CELERY_BROKER_URL = 'redis://redis:6379/4'
+CELERY_TIMEZONE='Europe/Moscow'
+CELERY_ENABLE_UTC=True
+
+CELERY_BEAT_SCHEDULE = {
+    'SetActive': {
+        'task': 'pages.tasks.set_active',
+        'schedule': datetime.timedelta(hours=4),
+    },
+}
+

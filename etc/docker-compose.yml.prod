@@ -1,0 +1,81 @@
+version: '2'
+
+services:
+  app:
+    image: registry.sl-team.ru/sizex
+    command: ["wait-for", "postgres:5432", "--", "run_application"]
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PROD=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - SIZEX_DATABASE_URL=postgresql://sizex:sizex@postgres:5432/sizex
+    links:
+      - postgres
+      - redis
+    volumes:
+      - /data/static:/data/static
+      - /data/media:/data/media
+
+  celery:
+    image: registry.sl-team.ru/sizex
+    command: ["wait-for", "app:8000", "--", "run_celery"]
+    restart: always
+    environment:
+      - PROD=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - SIZEX_DATABASE_URL=postgresql://sizex:sizex@postgres:5432/sizex
+    links:
+      - app
+      - postgres
+      - redis
+    volumes:
+      - /data/static:/data/static
+      - /data/media:/data/media
+
+  celerycam:
+    image: registry.sl-team.ru/sizex
+    command: ["wait-for", "app:8000", "--", "run_celerycam"]
+    restart: always
+    environment:
+      - PROD=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - SIZEX_DATABASE_URL=postgresql://sizex:sizex@postgres:5432/sizex
+    links:
+      - app
+      - postgres
+      - redis
+    volumes:
+      - /data/static:/data/static
+      - /data/media:/data/media
+
+  postgres:
+    image: postgres:10.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=sizex
+      - POSTGRES_PASSWORD=sizex
+      - POSTGRES_DB=sizex
+    volumes:
+      - /mnt/docker/sizex-postgres/data:/var/lib/postgresql/data
+      - /mnt/docker/sizex-postgres/backup:/var/lib/postgresql/backup
+    ports:
+      - "55432:5432"
+
+  redis:
+    image: redis
+    restart: always
+
+  web:
+    image: nginx
+    restart: always
+    volumes:
+      - ./sizex.conf:/etc/nginx/conf.d/mysite.template
+      - /data/static:/data/static
+      - /data/media:/data/media
+    links:
+      - app
+    ports:
+      - 80:80
+    command: /bin/bash -c "cp /etc/nginx/conf.d/mysite.template /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"

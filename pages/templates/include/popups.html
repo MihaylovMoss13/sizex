@@ -1,0 +1,90 @@
+{% load static %}
+
+<div id="feedback-modal" class="feedback__modal" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <form class="feedback_modal">
+      <h2 class="feedback__modal__title">Вызов замерщика</h2>
+      <input class="uk-input uk-margin-small"name="name" type="text" class="uk-input" placeholder="Введите ФИО" required/>
+      <input class="uk-input uk-margin-small" name="phone" type="text" class="uk-input" placeholder="Ваш телефон" required/>
+      <p class="feedback__modal__subtitle">* вводя свои персональные данные вы соглашаетесь с <a href="https://room-potolok.ru/policy/">политикой конфиденциальности</a> установленной на нашем портале.</p>
+      <button class="uk-button uk-margin-small">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<div id="feedback-modal-type2" class="feedback__modal__type2" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <form class="feedback_modal">
+      <h2 class="feedback__modal__title">Рассчитать стоимость</h2>
+      <input class="uk-input uk-margin-small"name="name" type="text" class="uk-input" placeholder="Введите ФИО" required/>
+      <input class="uk-input uk-margin-small" name="phone" type="text" class="uk-input" placeholder="Ваш телефон" required/>
+      <p class="feedback__modal__subtitle">* вводя свои персональные данные вы соглашаетесь с <a href="https://room-potolok.ru/policy/">политикой конфиденциальности</a> установленной на нашем портале.</p>
+      <button class="uk-button uk-margin-small">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<div id="feedback-modal-type3" class="feedback__modal__type3" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <form class="feedback_modal">
+      <h2 class="feedback__modal__title">Заказать звонок</h2>
+      <input class="uk-input uk-margin-small"name="name" type="text" class="uk-input" placeholder="Введите ФИО" required/>
+      <input class="uk-input uk-margin-small" name="phone" type="text" class="uk-input" placeholder="Ваш телефон" required/>
+      <p class="feedback__modal__subtitle">* вводя свои персональные данные вы соглашаетесь с <a href="https://room-potolok.ru/policy/">политикой конфиденциальности</a> установленной на нашем портале.</p>
+      <button class="uk-button uk-margin-small">Отправить</button>
+    </form>
+  </div>
+</div>
+
+
+<div id="catalog-modal" class="uk-modal-container catalog__modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <div class="uk-grid catalog">
+        {% for page in left_menu %}
+          <div class="uk-width-1-4">
+            <ul uk-accordion>
+            {% if page.get_children %}
+              <li class="submenu {% if object == page or object in page.get_children %}uk-open{% endif %}">
+                  <span class="uk-accordion-title">
+                    <a>{{ page.name }}</a> 
+                    <span class="menu__opener"><svg><use xlink:href="{% static 'pages/images/sprite.svg' %}#breadcrumb"></use></svg></span>
+                  </span>
+                  <ul class="uk-accordion-content">
+                    {% for child in page.get_children %}
+                      {% if object == child %}
+                        <li class="active"><a>{{ child.name }}</a></li>
+                      {% else %}
+                        <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+            {% else %}
+              {% if object == page %}
+                <li class="active"><a>{{ page.name }}</a></li>
+              {% else %}
+                <li><a {% if page.is_link %}href="{{ page.get_absolute_url }}{% endif %}">{{ page.name }}</a></li>
+              {% endif %}
+            {% endif %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+
+<div id="town-modal" class="town__modal uk-modal-container" uk-modal>
+  <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <button class="uk-modal-close-default" type="button" uk-close></button>
+    <div class="uk-grid towns">
+      {% for town in TOWNS %}
+        <div class="uk-width-1-3@m">
+          <p align="center"><a href="http://{{ town.domain }}"> {{ town.name }} </a></p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

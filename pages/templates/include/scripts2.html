@@ -1,0 +1,8 @@
+{% load static %}
+{% load compress %}
+
+
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+{% compress js %}
+    <script src="{% static 'pages/js/app/lombard2.js' %}" async></script>
+{% endcompress %}

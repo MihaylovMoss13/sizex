@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: registry.sl-team.ru/sizex
+    restart: always
+    command: ["wait-for", "postgres:5432", "--", "run_application"]
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - SIZEX_DATABASE_URL=postgresql://sizex:sizex@postgres:5432/sizex
+    links:
+      - postgres
+      - redis
+    volumes:
+      - "./:/etc/sizex/"
+
+  celery:
+    container_name: celery
+    image: registry.sl-team.ru/sizex
+    command: ["wait-for", "app:8000", "--", "run_celery"]
+    environment:
+      - PROD=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - SIZEX_DATABASE_URL=postgresql://sizex:sizex@postgres:5432/sizex
+    links:
+      - app
+      - postgres
+      - redis
+
+  postgres:
+    container_name: postgres
+    image: postgres:10.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=sizex
+      - POSTGRES_PASSWORD=sizex
+      - POSTGRES_DB=sizex
+    ports:
+      - "55432:5432"
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
